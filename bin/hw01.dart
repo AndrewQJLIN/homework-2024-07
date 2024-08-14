@@ -6,7 +6,7 @@ void main() {
   Set<String> listOfLetters = {}; // список переменных в выражении
   bool checkOut;
   Map<String, String> argOfLetters =
-  <String, String>{}; // словарь значений переменных в выражении
+  <String, String>{}; // словарь значений переменных в выражении от пользователя
 
   var inputString =
   (stdin.readLineSync() ?? '').toString(); // запрашиваем сроку с консоли

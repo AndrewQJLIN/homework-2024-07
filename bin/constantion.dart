@@ -17,5 +17,5 @@ List<String> alphabets = List<String>.generate(
 );
 
 final letters = alphabets + alphabetsCup;
-final validPervSymbol = validNumber + [')'];
+final validPervSymbol = validNumber + [')']; // не используется
 final validNextSymbol = validNumber + ['('];
