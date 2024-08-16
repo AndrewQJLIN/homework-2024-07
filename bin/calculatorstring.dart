@@ -31,7 +31,7 @@ class CalculatorString {
     print(postFixList);
   }
 
-
+// формируем окончательную строку подставляя вместо переменных значения и знак * между переменными
   String getFinalString() {
     String finalStr = '';
     String outNumber;
@@ -73,6 +73,7 @@ class CalculatorString {
     return finalStr;
   }
 
+  // формируем список в постфиксной записи
   List<String> getToPostFix(String inputString) {
     Stack stackOperation = Stack();
 
@@ -125,6 +126,7 @@ class CalculatorString {
     return postFixStr;
   }
 
+  // считаем постфиксную запись
   double calculatePostFix(List<String> finalStrToCalc) {
     Stack<double> stack = Stack();
     String data;

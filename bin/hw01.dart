@@ -4,24 +4,21 @@ import 'calculatorstring.dart';
 import 'constantion.dart';
 
 void main() {
-  // список переменных в выражении
-  Set<String> listOfLetters = {};
+  Set<String> listOfLetters = {}; // список переменных в выражении
 
-  // мапа [имя переменной]:[числовое значение]
-  Map<String, String> argOfLetters = <String, String>{};
+  Map<String, String> argOfLetters =
+      <String, String>{}; // мапа [имя переменной]:[числовое значение]
 
-  // запрашиваем сроку с консоли
-  var inputString = (stdin.readLineSync() ?? '').toString();
+  var inputString =
+      (stdin.readLineSync() ?? '').toString(); // запрашиваем сроку с консоли
 
-  // проверяем строку на ошибки и выделяем переменные
-  listOfLetters = checkInputStrOnError(inputString);
+  listOfLetters = checkInputStrOnError(
+      inputString); // проверяем строку на ошибки и выделяем переменные
 
-// если есть ошибка - печатаем ее и выходим
   if (listOfLetters.isNotEmpty && listOfLetters.last[0] == '!') {
-    print(listOfLetters.last);
+    print(listOfLetters.last); // если есть ошибка - печатаем ее и выходим
     return;
   }
-
 // если в выражении есть переменные - запрашиваем их у пользователя
   if (listOfLetters.isNotEmpty) {
     argOfLetters = getValueOfVariables(listOfLetters);
@@ -31,6 +28,7 @@ void main() {
   final CalculatorString calc = CalculatorString(inputString, argOfLetters);
 
   calc.finalStringPrint(); // покажем финальное выражение после подстановки всех элементов
+  // calc.finalPostFixPrint();        // покажем постфиксную запись
 
   print('\nОтвет: ${calc.result()}'); // считаем и показываем ответ
 }
