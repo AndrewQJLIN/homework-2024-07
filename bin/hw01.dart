@@ -7,7 +7,7 @@ void main() {
   // список переменных в выражении
   Set<String> listOfLetters = {};
 
-  // мапа [имя переменной]:[числовое занчение]
+  // мапа [имя переменной]:[числовое значение]
   Map<String, String> argOfLetters = <String, String>{};
 
   // запрашиваем сроку с консоли
@@ -30,7 +30,7 @@ void main() {
   // создаем класс калькулятор и туда передаем исходное выражение и список из переменнных и их значений
   final CalculatorString calc = CalculatorString(inputString, argOfLetters);
 
-  calc.finalStringPrint(); // покажем финальное выражение
+  calc.finalStringPrint(); // покажем финальное выражение после подстановки всех элементов
 
   print('\nОтвет: ${calc.result()}'); // считаем и показываем ответ
 }

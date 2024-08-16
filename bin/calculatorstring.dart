@@ -135,7 +135,7 @@ class CalculatorString {
         stack.push(double.parse(data)); // если это число кладем в стек
       } else {
         if (data == '~') {
-          // если это унарный минус - выполняем его как более высокий приоритет, иначе это другой оператор и тогла берем из стэка два последних числа и выполняем
+          // если это унарный минус - выполняем его как более высокий приоритет, иначе это другой оператор и тогда берем из стэка два последних числа и выполняем
           double last = stack.isNotEmpty ? stack.pop() : 0;
 
           stack.push(execute('-', 0, last));
@@ -153,7 +153,7 @@ class CalculatorString {
             '${counterOperation++}) $first $data $second = ${stack.peek}'); // выводим порядок операций
       }
     }
-    return stack.peek; // то что осталос в стэке и есть ответ
+    return stack.peek; // то что осталось в стэке и есть ответ
   }
 
   double execute(String operator, double first, double second) =>
@@ -179,10 +179,7 @@ class Stack<E> {
   final _list = <E>[];
 
   void push(E value) => _list.add(value);
-
   E pop() => _list.removeLast();
-
   E get peek => _list.last;
-
   bool get isNotEmpty => _list.isNotEmpty;
 }
