@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'constantion.dart';
 
 class CalculatorString {
@@ -175,6 +176,77 @@ class CalculatorString {
         '-' => 1,
         _ => 0,
       };
+
+// 3 статические функции - получить из строки число, проверить все ли символы в выражении допустимы, запросить у пользователя значения переменных
+  static (String, int) getNumberFromString(String str, int currentPosition) {
+    String numberByStr = '';
+
+    for (; currentPosition < str.length; currentPosition++) {
+      String num = str[currentPosition];
+      if (validNumber.contains(num) ||
+          ((num == '-' || num == '+') && numberByStr.isEmpty)) {
+        numberByStr += num;
+      } else {
+        currentPosition--;
+        break;
+      }
+    }
+    try {
+      double.parse(numberByStr);
+    } on FormatException {
+      print(
+          'Обнаружен неверный формат записи числа ($numberByStr)! Число будет пропущено!');
+      numberByStr = '';
+    }
+    return (numberByStr, currentPosition);
+  }
+
+  static Set<String> checkInputStrOnError(String inputString) {
+    Set<String> arguments = {};
+    var brackets = 0;
+
+    for (int i = 0; i < inputString.length; i++) {
+      var currentSymbol = inputString[i];
+      if (validNumber.contains(currentSymbol) ||
+          validOperand.contains(currentSymbol) ||
+          baskets.contains(currentSymbol) ||
+          letters.contains(currentSymbol)) {
+        if (currentSymbol == '(') brackets++;
+        if (currentSymbol == ')') brackets--;
+        if (letters.contains(currentSymbol)) {
+          arguments.add(currentSymbol);
+        }
+      } else {
+        arguments.add('! Недопустимые символы в выражении');
+      }
+    }
+
+    if (brackets != 0) {
+      arguments.add('! Ошибка в выражении = Не парные скобки');
+    }
+    return arguments;
+  }
+
+  static Map<String, String> getValueOfVariables(Set<String> listOfLetters) {
+    var indexLetters = 0;
+    String inputValueLetters;
+    Map<String, String> argOfLetters = {};
+    print('В выражении используются переменные: $listOfLetters \n');
+
+    do {
+      print(
+          'Введите значение для переменной - ${listOfLetters.elementAt(indexLetters)} = ');
+      inputValueLetters = (stdin.readLineSync() ?? '').toString();
+      (inputValueLetters, _) = CalculatorString.getNumberFromString(inputValueLetters, 0);
+      if (inputValueLetters == '') {
+        print('Неверное число, попробуйте снова');
+      } else {
+        argOfLetters[listOfLetters.elementAt(indexLetters++)] = inputValueLetters;
+      }
+    } while (indexLetters < listOfLetters.length);
+    print('Ваши переменные получили следующие значения: $argOfLetters');
+    return argOfLetters;
+  }
 }
 
 class Stack<E> {
