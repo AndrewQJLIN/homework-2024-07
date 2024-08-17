@@ -159,8 +159,8 @@ class CalculatorString {
     return stack.peek; // то что осталось в стэке и есть ответ
   }
 
-  double execute(String operator, double first, double second) =>
-      switch (operator) {
+  double execute(String operation, double first, double second) =>
+      switch (operation) {
         '+' => first + second,
         '-' => first - second,
         '*' => first * second,
@@ -168,7 +168,7 @@ class CalculatorString {
         _ => 0,
       };
 
-  int prioriOperation(String operator) => switch (operator) {
+  int prioriOperation(String operation) => switch (operation) {
         '~' => 3,
         '/' => 2,
         '*' => 2,
