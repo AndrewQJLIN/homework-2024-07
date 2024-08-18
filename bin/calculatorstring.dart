@@ -217,7 +217,7 @@ class CalculatorString {
           arguments.add(currentSymbol);
         }
       } else {
-        arguments.add('! Недопустимые символы в выражении');
+        arguments.add('! Недопустимые символы в выражении: - $currentSymbol');
       }
     }
 
